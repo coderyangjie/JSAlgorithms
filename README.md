@@ -1,0 +1,2 @@
+# JSAlgorithms
+javaScript语言实现的数据结构和算法的插件，包括使用demo和API，可以引入相应的插件来使用相应的算法。
