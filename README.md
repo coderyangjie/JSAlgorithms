@@ -24,21 +24,21 @@ javaScript语言实现的数据结构和算法的插件，包括使用demo和API
 参数callback为回调函数。该函数可以对每个遍历的节点做相应的操作和处理。
 回调函数的的参数为每个遍历的节点对象。
 > binarySortTree.preOrderTraversal(function(node){ \  
->        console.log(node.key); \
+>        &nbsp;&nbsp; console.log(node.key); \
 >  });
 ### 5. inOrderTraversal(callback)   
 二叉排序树中序遍历。  
 参数callback为回调函数。该函数可以对每个遍历的节点做相应的操作和处理。
 回调函数的的参数为每个遍历的节点对象。
 > binarySortTree.inOrderTraversal(function(node){ \
->        console.log(node.key); \
+>        &nbsp;&nbsp; console.log(node.key); \
 >  });
 ### 6. postOrderTraversal(callback)   
 二叉排序树后序遍历。  
 参数callback为回调函数。该函数可以对每个遍历的节点做相应的操作和处理。
 回调函数的的参数为每个遍历的节点对象。
 > binarySortTree.postOrderTraversal(function(node){ \
->        console.log(node.key); \
+>       &nbsp;&nbsp; console.log(node.key); \
 >  });  
 ### 7. min()   
 返回二叉排序树中节点的最小值。   
@@ -57,10 +57,7 @@ javaScript语言实现的数据结构和算法的插件，包括使用demo和API
 查找二叉排序树中当前节点的最小值节点。 
 参数node为当前节点对象。
 >binarySortTree.findMinNode(node);
-### 11. findMinNode(node)   
-查找二叉排序树中当前节点的最小值节点。 
-参数node为当前节点对象。
->binarySortTree.findMinNode(node);
+
 
 
 
