@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现排序二叉树</title>
+    <script type="text/javascript">
+
+        //二叉排序树（Binary Sort Tree）
+        function BinarySortTree(){
+            //节点类
+            var Node = function(key){
+                this.key = key; //节点的值
+                this.left = null;//节点的左孩子节点
+                this.right = null;//节点的右孩子节点
+            }
+
+            var root = null;//定义根节点
+            /**
+             * 节点插入方法
+             * @param key 节点值
+             */
+            this.insert = function(key){
+                var newNode = new Node(key);
+                if(root===null){
+                    root = newNode;
+                }else{
+                    insertNode(root,newNode);
+                }
+            };
+
+            /**
+             * 为当前节点插入新节点
+             * @param node  老节点
+             * @param newNode  新节点
+             */
+            var insertNode = function(node,newNode){
+                //排序二叉树，节点的左节点小于节点的值，右节点的值大于节点的值
+                if(newNode.key<node.key){
+                    if(node.left===null){
+                        node.left=newNode;
+                    }else{
+                        insertNode(node.left,newNode);
+                    }
+                }else{
+                    if(node.right===null){
+                        node.right=newNode;
+                    }else{
+                        insertNode(node.right,newNode);
+                    }
+                }
+            }
+
+
+            /**
+             *  中序遍历二叉排序树
+             *  中序遍历二叉排序树可以将数组的值由小到大排序
+             * @param callback  回调函数，专门用来处理节点值的方法
+             */
+            this.inOrderTraversal = function(callback){
+                inOrderTraverseNode(root,callback);
+            }
+
+            var inOrderTraverseNode = function(node,callback){
+                if(node!==null){
+                    inOrderTraverseNode(node.left,callback);
+                    callback(node.key);
+                    inOrderTraverseNode(node.right,callback);
+                }
+            }
+
+            /**
+             * 前序遍历二叉排序树
+             * 前序遍历二叉排序树可以用于快速的复制一棵二叉排序树
+             * @param callback 回调函数，专门用来处理节点值的方法
+             */
+            this.preOrderTraversal = function(callback){
+                preOrderTraverseNode(root,callback);
+            }
+
+            var preOrderTraverseNode = function(node,callback){
+                if(node!==null){
+                    callback(node.key);
+                    preOrderTraverseNode(node.left,callback);
+                    preOrderTraverseNode(node.right,callback);
+                }
+            }
+
+
+            /**
+             * 后序遍历二叉排序树
+             * 后序遍历可以运用到操作系统的文件系统的遍历中,先遍历子文件夹后遍历根文件目录
+             * @param callback 回调函数，专门用来处理节点值的方法
+             */
+            this.postOrderTraversal = function(callback){
+                postOrderTraverseNode(root,callback);
+            }
+
+            var postOrderTraverseNode = function(node,callback){
+                if(node!==null){
+                    postOrderTraverseNode(node.left,callback);
+                    postOrderTraverseNode(node.right,callback);
+                    callback(node.key);
+                }
+            }
+
+
+            /**
+             * 二叉排序树查找最小值
+             */
+            this.min = function(){
+                return minNode(root);
+            }
+            var minNode = function(node){
+                if(node){
+                    while(node && node.left!==null){
+                        node = node.left;
+                    }
+                    return node.key;
+                }
+                return null;
+            }
+
+            /**
+             * 二叉排序树查找最大值
+             */
+            this.max = function(){
+                return maxNode(root);
+            }
+
+            var maxNode = function(node){
+                if(node){
+                    while(node && node.right!==null){
+                        node = node.right;
+                    }
+                    return node.key;
+                }
+                return null;
+            }
+            /**
+             * 查找二叉排序树是否包含特定值
+             * @param value
+             */
+            this.search = function(key){
+                return searchNode(root,key);
+            };
+
+            var searchNode = function(node,key){
+
+                if(node===null){
+                    return false;
+                }
+                if(key<node.key){
+                    return searchNode(node.left,key);
+                }else if(key>node.key){
+                    return searchNode(node.right,key);
+                }else{
+                    return true;
+                }
+
+            };
+
+            this.remove = function(key){
+                root = removeNode(root,key);
+            }
+
+            var removeNode = function(node,key){
+                if(node===null){
+                    return null;
+                }
+
+                if(key<node.key){
+                    node.left = removeNode(node.left,key);
+                    return node;
+                }else if(key>node.key){
+                    node.right = removeNode(node.right,key);
+                    return node;
+                }else{
+                    //如果当前节点为叶子节点，即没有左子树也没有右子树
+                    if(node.left===null && node.right===null){
+                        node=null;
+                        return node;
+                    }
+
+                    //如果当前节点只有右子树时
+                    if(node.left===null){
+                        node = node.right;
+                        return node;
+                    }else if(node.right===null){ //如果当前节点只有左子树时
+                        node = node.left;
+                        return node;
+                    }
+
+                    //当前节点同时包含左子树和右子树时
+                    //查找当前节点右子树下面的最小值节点
+                    var minNode = findMinNode(node.right);
+                    node.key = minNode.key;
+                    node.right = removeNode(node.right,minNode.key);
+                    return node;
+                }
+            }
+
+            /**
+             *  查找当前节点下的最小值节点
+             * @param node
+             */
+            var findMinNode = function(node){
+                if(node){
+                    while(node && node.left!==null){
+                        node = node.left;
+                    }
+                    return node;
+                }
+                return null;
+            }
+
+        }
+
+        //测试
+        var nodes = [8,3,10,1,6,14,4,7,13];
+        var binarySortTree = new BinarySortTree();
+        nodes.forEach(function(key){
+            binarySortTree.insert(key);
+        });
+        console.log(binarySortTree.toString());
+        binarySortTree.inOrderTraversal(function(key){
+            console.log(key);
+        });
+        console.log("min node is:"+binarySortTree.min());
+        console.log("max node is:"+binarySortTree.max());
+
+        console.log(binarySortTree.search(7)?"key 7 is found":"key 7 is not found");
+        console.log(binarySortTree.search(9) ? "key 9 is found" :"key 9 is not found");
+
+
+    </script>
+</head>
+<body>
+<p>此文件为开发二叉排序树算法实现时的测试html</p>
+</body>
+</html>

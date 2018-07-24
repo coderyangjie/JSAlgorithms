@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>binarySortTreeDemo</title>
+    <script type="text/javascript" src="js/binarySortTree.js"></script>
+    <script type="text/javascript">
+        var nodes = [8,3,10,1,6,14,4,7,13];
+        binarySortTree.initTreeByArray(nodes);
+        alert(binarySortTree.getRoot().key);
+       /* binarySortTree.inOrderTraversal(function(node){
+            console.log(node.key);
+        });*/
+       /* binarySortTree.preOrderTraversal(function(node){
+            console.log(node.key);
+        });*/
+       /* binarySortTree.postOrderTraversal(function(node){
+            console.log(node.key);
+        });*/
+        alert(binarySortTree.min());
+        alert(binarySortTree.max());
+        alert(binarySortTree.search(7));
+        alert(binarySortTree.search(9));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
