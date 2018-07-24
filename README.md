@@ -57,6 +57,10 @@ javaScript语言实现的数据结构和算法的插件，包括使用demo和API
 查找二叉排序树中当前节点的最小值节点。 
 参数node为当前节点对象。
 >binarySortTree.findMinNode(node);
+### 11. findMinNode(node)   
+查找二叉排序树中当前节点的最小值节点。 
+参数node为当前节点对象。
+>binarySortTree.findMinNode(node);
 
 
 
